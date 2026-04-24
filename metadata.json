@@ -1,0 +1,15 @@
+{
+  "name": "SMK Prima Unggul ERP",
+  "description": "Sistem Informasi Manajemen Sekolah Terpadu: Absensi Karyawan & Siswa serta Pelaksanaan Ujian Online untuk SMK Prima Unggul Tangerang Selatan.",
+  "requestFramePermissions": [
+    "camera",
+    "microphone",
+    "geolocation"
+  ],
+  "majorCapabilities": [
+    "Authentication",
+    "Real-time Database",
+    "Role-based Access Control",
+    "Examination Engine"
+  ]
+}

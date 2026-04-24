@@ -1,0 +1,81 @@
+{
+  "entities": {
+    "User": {
+      "title": "User",
+      "description": "System user with role-based access",
+      "type": "object",
+      "properties": {
+        "uid": { "type": "string" },
+        "email": { "type": "string" },
+        "displayName": { "type": "string" },
+        "role": { "type": "string", "enum": ["admin", "guru", "tenaga_kependidikan", "siswa"] },
+        "major": { "type": "string", "description": "TKJ, DKV, AK, BC, MPLB, BD" },
+        "nisn": { "type": "string" },
+        "username": { "type": "string" }
+      },
+      "required": ["uid", "role"]
+    },
+    "Student": {
+      "title": "Student",
+      "description": "Student master data",
+      "type": "object",
+      "properties": {
+        "nisn": { "type": "string" },
+        "name": { "type": "string" },
+        "class": { "type": "string" },
+        "major": { "type": "string" }
+      },
+      "required": ["nisn", "name", "class", "major"]
+    },
+    "Attendance": {
+      "title": "Attendance",
+      "description": "Attendance record for employees and students",
+      "type": "object",
+      "properties": {
+        "userId": { "type": "string" },
+        "type": { "type": "string", "enum": ["employee", "student"] },
+        "studentId": { "type": "string", "description": "NISN if type is student" },
+        "status": { "type": "string", "enum": ["present", "sick", "leave", "absent"] },
+        "date": { "type": "string", "format": "date" },
+        "timestamp": { "type": "string", "format": "date-time" },
+        "location": { "type": "string" }
+      },
+      "required": ["userId", "type", "status", "date", "timestamp"]
+    },
+    "Exam": {
+      "title": "Exam",
+      "description": "Online exam configuration",
+      "type": "object",
+      "properties": {
+        "title": { "type": "string" },
+        "major": { "type": "string" },
+        "duration": { "type": "integer", "description": "Duration in minutes" },
+        "questions": {
+          "type": "array",
+          "items": { "type": "object" }
+        }
+      },
+      "required": ["title", "major", "duration", "questions"]
+    },
+    "ExamResult": {
+      "title": "ExamResult",
+      "description": "Result of a student's exam",
+      "type": "object",
+      "properties": {
+        "examId": { "type": "string" },
+        "studentId": { "type": "string" },
+        "score": { "type": "number" },
+        "completedAt": { "type": "string", "format": "date-time" },
+        "answers": { "type": "array" }
+      },
+      "required": ["examId", "studentId", "score"]
+    }
+  },
+  "firestore": {
+    "users/{uid}": { "schema": "User", "description": "Users of the system" },
+    "students/{nisn}": { "schema": "Student", "description": "Student database" },
+    "attendance/{id}": { "schema": "Attendance", "description": "Attendance records" },
+    "exams/{id}": { "schema": "Exam", "description": "Examination questions" },
+    "exam_results/{id}": { "schema": "ExamResult", "description": "Results of exams" }
+  }
+}
