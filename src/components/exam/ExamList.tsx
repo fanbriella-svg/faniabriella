@@ -59,72 +59,72 @@ export default function ExamList() {
   };
 
   return (
-    <div className="space-y-8">
+    <div className="space-y-6">
       <div>
-        <h2 className="text-3xl font-extrabold text-gray-900 mb-2">Ujian Online</h2>
-        <p className="text-gray-500 font-medium tracking-tight">Daftar ujian tersedia untuk dikerjakan hari ini.</p>
+        <h2 className="text-xl font-bold text-slate-900 leading-tight">Ujian Online</h2>
+        <p className="text-[11px] text-slate-500 font-medium tracking-tight">Daftar ujian tersedia untuk dikerjakan hari ini.</p>
       </div>
 
       <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
         {loading ? (
-          <div className="col-span-full py-20 text-center text-gray-400 font-medium">Memuat daftar ujian...</div>
+          <div className="col-span-full py-12 text-center text-slate-400 font-medium italic text-sm">Memuat daftar ujian...</div>
         ) : exams.length === 0 ? (
-          <div className="col-span-full py-20 text-center text-gray-400 font-medium italic">Tidak ada ujian aktif untuk Anda.</div>
+          <div className="col-span-full py-12 text-center text-slate-400 font-medium italic text-sm">Tidak ada ujian aktif.</div>
         ) : (
           exams.map((exam) => (
             <motion.div
               key={exam.id}
-              whileHover={{ y: -5 }}
-              className="bg-white rounded-[2rem] border border-gray-100 p-8 shadow-sm hover:shadow-md transition-all flex flex-col h-full"
+              whileHover={{ y: -2 }}
+              className="hd-card p-6 flex flex-col h-full"
             >
               <div className="flex items-center gap-3 mb-6">
-                <div className="w-12 h-12 rounded-2xl bg-brand/10 text-brand flex items-center justify-center">
-                  <FileText size={24} />
+                <div className="w-10 h-10 rounded-lg bg-brand/10 text-brand flex items-center justify-center">
+                  <FileText size={20} />
                 </div>
-                <div className="px-3 py-1 bg-gray-50 rounded-lg text-[10px] font-bold text-gray-400 uppercase tracking-widest">
+                <div className="px-2 py-0.5 bg-slate-50 rounded text-[10px] font-bold text-slate-400 uppercase tracking-widest border border-slate-100">
                   {exam.major}
                 </div>
               </div>
 
-              <h3 className="text-xl font-bold text-gray-900 mb-4 leading-snug flex-1">
+              <h3 className="text-sm font-bold text-slate-800 mb-4 leading-snug flex-1">
                 {exam.title}
               </h3>
 
-              <div className="grid grid-cols-2 gap-4 mb-8">
-                <div className="p-3 bg-gray-50 rounded-xl">
-                  <div className="flex items-center gap-2 text-gray-400 mb-1">
-                    <Clock size={14} />
-                    <span className="text-[10px] font-bold uppercase tracking-tight">Durasi</span>
+              <div className="grid grid-cols-2 gap-3 mb-6">
+                <div className="p-2.5 bg-slate-50 rounded-lg border border-slate-100">
+                  <div className="flex items-center gap-1.5 text-slate-400 mb-1">
+                    <Clock size={12} />
+                    <span className="text-[9px] font-bold uppercase tracking-tight">Durasi</span>
                   </div>
-                  <p className="font-bold text-gray-900 text-sm">{exam.duration} Menit</p>
+                  <p className="font-bold text-slate-900 text-xs">{exam.duration} Min</p>
                 </div>
-                <div className="p-3 bg-gray-50 rounded-xl">
-                  <div className="flex items-center gap-2 text-gray-400 mb-1">
-                    <BookOpen size={14} />
-                    <span className="text-[10px] font-bold uppercase tracking-tight">Soal</span>
+                <div className="p-2.5 bg-slate-50 rounded-lg border border-slate-100">
+                  <div className="flex items-center gap-1.5 text-slate-400 mb-1">
+                    <BookOpen size={12} />
+                    <span className="text-[9px] font-bold uppercase tracking-tight">Soal</span>
                   </div>
-                  <p className="font-bold text-gray-900 text-sm">{exam.questions.length} Butir</p>
+                  <p className="font-bold text-slate-900 text-xs">{exam.questions.length} Butir</p>
                 </div>
               </div>
 
               <button
                 onClick={() => navigate(`/ujian/${exam.id}`)}
-                className="w-full py-4 bg-gray-900 text-white font-bold rounded-2xl flex items-center justify-center gap-2 hover:bg-gray-800 transition-colors group"
+                className="w-full py-2.5 bg-slate-900 text-white font-bold rounded-lg flex items-center justify-center gap-2 hover:opacity-90 transition-all group text-xs uppercase tracking-wider"
               >
-                Kerjakan Sekarang <Play size={18} className="fill-current group-hover:translate-x-1 transition-transform" />
+                Kerjakan <Play size={14} className="fill-current" />
               </button>
             </motion.div>
           ))
         )}
       </div>
 
-      <div className="bg-orange-50 border border-orange-100 p-6 rounded-3xl flex items-start gap-4">
-        <div className="w-10 h-10 rounded-xl bg-orange-100 text-orange-600 shrink-0 flex items-center justify-center">
-          <AlertCircle size={20} />
+      <div className="bg-orange-50 border border-orange-100 p-4 rounded-xl flex items-start gap-4">
+        <div className="w-8 h-8 rounded-lg bg-orange-100 text-orange-600 shrink-0 flex items-center justify-center">
+          <AlertCircle size={16} />
         </div>
         <div>
-           <h4 className="font-bold text-orange-900 text-sm mb-1">Petunjuk Ujian</h4>
-           <p className="text-xs text-orange-700/80 font-medium leading-relaxed">
+           <h4 className="font-bold text-orange-900 text-xs mb-1">Petunjuk Ujian</h4>
+           <p className="text-[11px] text-orange-700/80 font-medium leading-relaxed">
              Pastikan koneksi internet stabil sebelum memulai. Sekali dimulai, waktu akan terus berjalan meskipun Anda menutup browser. Nilai KKM untuk semua mata pelajaran adalah 50.
            </p>
         </div>

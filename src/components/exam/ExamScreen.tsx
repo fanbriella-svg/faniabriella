@@ -122,105 +122,105 @@ export default function ExamScreen() {
   const currentQ = exam.questions[currentIdx];
 
   return (
-    <div className="min-h-screen bg-gray-50 flex flex-col">
+    <div className="min-h-screen bg-surface flex flex-col font-sans">
       {/* Header */}
-      <header className="h-20 bg-white border-b border-gray-100 flex items-center justify-between px-6 lg:px-12 sticky top-0 z-40">
-        <div className="flex items-center gap-4">
-          <div className="w-10 h-10 bg-brand rounded-xl flex items-center justify-center text-white shrink-0">
-            <School size={20} />
+      <header className="h-14 bg-white border-b border-slate-200 flex items-center justify-between px-4 lg:px-8 sticky top-0 z-40 shadow-sm">
+        <div className="flex items-center gap-3">
+          <div className="w-8 h-8 bg-brand rounded-lg flex items-center justify-center text-white shrink-0">
+            <School size={18} />
           </div>
           <div>
-             <h1 className="font-extrabold text-gray-900 leading-tight text-sm md:text-base truncate max-w-[200px] md:max-w-md">
+             <h1 className="font-bold text-slate-900 leading-tight text-xs md:text-sm truncate max-w-[150px] md:max-w-md">
                {exam.title}
              </h1>
-             <p className="text-[10px] uppercase font-bold text-gray-400 tracking-widest">{exam.major} • KKM 50</p>
+             <p className="text-[9px] uppercase font-bold text-slate-400 tracking-widest leading-none mt-0.5">{exam.major} • KKM 50</p>
           </div>
         </div>
 
-        <div className="flex items-center gap-4 lg:gap-8">
+        <div className="flex items-center gap-4 lg:gap-6">
            {!finished && (
-             <div className={`flex items-center gap-3 px-5 py-2 rounded-2xl border ${timeLeft < 300 ? 'bg-red-50 border-red-100 text-red-600 animate-pulse' : 'bg-gray-50 border-gray-100 text-gray-900'}`}>
-                <Timer size={20} />
-                <span className="font-mono font-bold text-xl">{formatTime(timeLeft)}</span>
+             <div className={`flex items-center gap-2.5 px-4 py-1.5 rounded-lg border ${timeLeft < 300 ? 'bg-rose-50 border-rose-100 text-rose-600 animate-pulse' : 'bg-slate-50 border-slate-100 text-slate-900'}`}>
+                <Timer size={16} />
+                <span className="font-mono font-bold text-lg">{formatTime(timeLeft)}</span>
              </div>
            )}
            <button 
             onClick={() => navigate('/app/ujian')}
-            className="flex items-center gap-2 text-sm font-bold text-gray-400 hover:text-gray-900 transition-colors"
+            className="flex items-center gap-1.5 text-xs font-bold text-slate-400 hover:text-slate-900 transition-colors uppercase tracking-wider"
            >
-             <LogOut size={18} /> <span className="hidden sm:inline">Keluar</span>
+             <LogOut size={16} /> <span className="hidden sm:inline">Keluar</span>
            </button>
         </div>
       </header>
 
       {finished ? (
-        <div className="flex-1 flex items-center justify-center p-6">
+        <div className="flex-1 flex items-center justify-center p-6 bg-slate-50">
           <motion.div 
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            className="bg-white p-10 md:p-16 rounded-[3rem] shadow-xl border border-gray-100 text-center max-w-xl w-full"
+            initial={{ opacity: 0, scale: 0.95 }}
+            animate={{ opacity: 1, scale: 1 }}
+            className="bg-white p-10 rounded-xl shadow-xl border border-slate-200 text-center max-w-md w-full"
           >
-            <div className={`w-24 h-24 mx-auto rounded-full flex items-center justify-center mb-8 ${score >= 50 ? 'bg-green-100 text-green-600' : 'bg-red-100 text-red-600'}`}>
-               <CheckCircle2 size={48} />
+            <div className={`w-16 h-16 mx-auto rounded-full flex items-center justify-center mb-6 ${score >= 50 ? 'bg-emerald-100 text-emerald-600' : 'bg-rose-100 text-rose-600'}`}>
+               <CheckCircle2 size={32} />
             </div>
-            <h2 className="text-3xl font-extrabold text-gray-900 mb-2">Ujian Selesai!</h2>
-            <p className="text-gray-500 font-medium mb-10 leading-relaxed">
-              Terima kasih telah mengerjakan ujian dengan jujur. Hasil Anda telah tersimpan secara otomatis di sistem.
+            <h2 className="text-xl font-bold text-slate-900 mb-2">Ujian Selesai!</h2>
+            <p className="text-[11px] text-slate-500 font-medium mb-8 leading-relaxed">
+              Terima kasih telah mengerjakan ujian dengan jujur. Hasil Anda telah tersimpan secara otomatis di sistem portal akademik.
             </p>
             
-            <div className="bg-gray-50 rounded-3xl p-8 mb-10">
-               <p className="text-sm font-bold text-gray-400 uppercase tracking-widest mb-2">Nilai Akhir</p>
-               <div className={`text-7xl font-black mb-4 ${score >= 50 ? 'text-green-600' : 'text-red-600'}`}>
+            <div className="bg-slate-50 rounded-lg p-6 mb-8 border border-slate-100">
+               <p className="text-[10px] font-bold text-slate-400 uppercase tracking-widest mb-1">Nilai Akhir</p>
+               <div className={`text-5xl font-black mb-3 ${score >= 50 ? 'text-emerald-600' : 'text-rose-600'}`}>
                  {score}
                </div>
-               <div className={`inline-flex px-4 py-2 rounded-full text-xs font-black uppercase tracking-tighter ${score >= 50 ? 'bg-green-100 text-green-700' : 'bg-red-100 text-red-700'}`}>
+               <div className={`inline-flex px-3 py-1 rounded text-[10px] font-bold uppercase tracking-wider ${score >= 50 ? 'bg-emerald-100 text-emerald-700' : 'bg-rose-100 text-rose-700'}`}>
                  {score >= 50 ? 'Lulus (KKM 50)' : 'Tidak Lulus'}
                </div>
             </div>
 
             <button 
               onClick={() => navigate('/app/ujian')}
-              className="w-full py-4 bg-gray-900 text-white font-bold rounded-2xl hover:bg-gray-800 transition-colors"
+              className="w-full py-3 bg-slate-900 text-white font-bold rounded-lg hover:opacity-90 transition-all text-xs uppercase tracking-wider shadow-sm"
             >
               Kembali ke Beranda
             </button>
           </motion.div>
         </div>
       ) : (
-        <div className="flex-1 flex flex-col lg:flex-row pb-20 lg:pb-0 h-full overflow-hidden">
+        <div className="flex-1 flex flex-col lg:flex-row pb-20 lg:pb-0 h-[calc(100vh-3.5rem)] overflow-hidden">
           {/* Question View */}
-          <div className="flex-1 p-6 lg:p-12 overflow-y-auto">
-            <div className="max-w-3xl mx-auto space-y-8">
+          <div className="flex-1 p-4 lg:p-10 overflow-y-auto bg-slate-50">
+            <div className="max-w-3xl mx-auto space-y-6">
                <div className="flex items-center justify-between">
-                 <div className="px-4 py-1 bg-gray-100 rounded-lg text-[10px] font-bold text-gray-500 uppercase tracking-widest">
-                   Soal {currentIdx + 1} dari {exam.questions.length}
+                 <div className="px-3 py-1 bg-white border border-slate-200 rounded text-[10px] font-bold text-slate-500 uppercase tracking-widest">
+                   Soal {currentIdx + 1} / {exam.questions.length}
                  </div>
-                 <div className={`px-3 py-1 rounded-lg text-[10px] font-bold uppercase tracking-widest ${currentQ.difficulty === 'hard' ? 'bg-orange-100 text-orange-600' : 'bg-green-100 text-green-600'}`}>
+                 <div className={`px-2 py-0.5 rounded text-[9px] font-bold uppercase tracking-widest ${currentQ.difficulty === 'hard' ? 'bg-orange-100 text-orange-600' : 'bg-emerald-100 text-emerald-600'}`}>
                    {currentQ.difficulty === 'hard' ? 'Sulit' : 'Mudah'}
                  </div>
                </div>
 
-               <h2 className="text-xl md:text-2xl font-bold text-gray-900 leading-relaxed">
+               <h2 className="text-lg md:text-xl font-bold text-slate-900 leading-relaxed bg-white p-6 rounded-lg shadow-sm border border-slate-200">
                  {currentQ.question}
                </h2>
 
-               <div className="space-y-4">
+               <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
                  {currentQ.options.map((option, i) => (
                    <button
                     key={i}
                     onClick={() => handleAnswer(i)}
-                    className={`w-full p-5 text-left rounded-2xl border-2 transition-all flex items-center gap-4 ${
+                    className={`w-full p-4 text-left rounded-lg border transition-all flex items-center gap-3 ${
                       answers[currentQ.id] === i 
-                        ? 'border-brand bg-brand/5 ring-4 ring-brand/5' 
-                        : 'border-gray-100 bg-white hover:border-gray-200'
+                        ? 'border-brand bg-brand/5 ring-2 ring-brand/5' 
+                        : 'border-slate-200 bg-white hover:border-slate-300'
                     }`}
                    >
-                     <div className={`w-10 h-10 rounded-xl flex items-center justify-center font-bold transition-colors ${
-                       answers[currentQ.id] === i ? 'bg-brand text-white' : 'bg-gray-50 text-gray-400'
+                     <div className={`w-8 h-8 rounded-md flex items-center justify-center font-bold text-sm transition-colors shrink-0 ${
+                       answers[currentQ.id] === i ? 'bg-brand text-white' : 'bg-slate-100 text-slate-400 font-mono'
                      }`}>
                        {String.fromCharCode(65 + i)}
                      </div>
-                     <span className={`font-bold text-sm md:text-base ${answers[currentQ.id] === i ? 'text-gray-900' : 'text-gray-600'}`}>
+                     <span className={`font-bold text-[13px] ${answers[currentQ.id] === i ? 'text-slate-900' : 'text-slate-600'}`}>
                        {option}
                      </span>
                    </button>
@@ -230,19 +230,19 @@ export default function ExamScreen() {
           </div>
 
           {/* Question Grid Sidebar */}
-          <div className="w-full lg:w-96 bg-white border-l border-gray-100 p-8 overflow-y-auto hidden lg:block">
-            <h3 className="font-extrabold text-gray-900 mb-6">Navigasi Soal</h3>
-            <div className="grid grid-cols-5 gap-3 mb-12">
+          <div className="w-full lg:w-80 bg-white border-l border-slate-200 p-6 overflow-y-auto hidden lg:block">
+            <h3 className="text-xs font-bold uppercase tracking-widest text-slate-400 mb-4">Navigasi Soal</h3>
+            <div className="grid grid-cols-5 gap-2 mb-8">
                {exam.questions.map((q, i) => (
                  <button
                   key={q.id}
                   onClick={() => setCurrentIdx(i)}
-                  className={`aspect-square rounded-xl flex items-center justify-center text-xs font-bold transition-all border-2 ${
+                  className={`aspect-square rounded-md flex items-center justify-center text-[10px] font-bold transition-all border ${
                     currentIdx === i 
                       ? 'border-brand bg-brand text-white' 
                       : answers[q.id] !== undefined
-                        ? 'border-brand/40 bg-brand/5 text-brand'
-                        : 'border-gray-50 bg-gray-50 text-gray-400 hover:border-gray-200'
+                        ? 'border-brand/40 bg-brand/5 text-brand shadow-sm'
+                        : 'border-slate-100 bg-slate-50 text-slate-400 hover:border-slate-300'
                   }`}
                  >
                    {i + 1}
@@ -250,48 +250,48 @@ export default function ExamScreen() {
                ))}
             </div>
 
-            <div className="p-6 bg-gray-50 rounded-3xl space-y-4">
-               <div className="flex items-center justify-between text-xs font-bold text-gray-400 uppercase tracking-widest">
+            <div className="p-4 bg-slate-50 rounded-lg space-y-3 border border-slate-100">
+               <div className="flex items-center justify-between text-[10px] font-bold text-slate-400 uppercase tracking-widest">
                  <span>Progres</span>
                  <span>{Math.round((Object.keys(answers).length / exam.questions.length) * 100)}%</span>
                </div>
-               <div className="h-2 bg-gray-200 rounded-full overflow-hidden">
+               <div className="h-1.5 bg-slate-200 rounded-full overflow-hidden">
                   <div 
                     className="h-full bg-brand transition-all duration-300" 
                     style={{ width: `${(Object.keys(answers).length / exam.questions.length) * 100}%` }}
                   />
                </div>
-               <p className="text-[10px] text-gray-400 font-medium leading-relaxed">
-                 Jawaban akan tersimpan otomatis setiap kali Anda memilih opsi.
+               <p className="text-[9px] text-slate-400 font-bold uppercase leading-relaxed">
+                 Auto-save aktif.
                </p>
             </div>
             
             <button
               onClick={handleSubmit}
               disabled={submitting}
-              className="w-full mt-8 py-4 bg-gray-900 text-white font-bold rounded-2xl flex items-center justify-center gap-2 hover:bg-gray-800 transition-colors shadow-lg"
+              className="w-full mt-6 py-2.5 bg-slate-900 text-white font-bold rounded-lg flex items-center justify-center gap-2 hover:opacity-90 transition-all shadow-sm text-xs uppercase tracking-wider"
             >
               {submitting ? (
-                <div className="w-5 h-5 border-2 border-white/30 border-t-white rounded-full animate-spin" />
+                <div className="w-4 h-4 border-2 border-white/30 border-t-white rounded-full animate-spin" />
               ) : (
-                <>Selesaikan Ujian <Flag size={18} /></>
+                <>SELESAI UJIAN <Flag size={14} /></>
               )}
             </button>
           </div>
 
           {/* Mobile Navigation bar */}
-          <div className="fixed bottom-0 left-0 w-full lg:hidden bg-white border-t border-gray-100 p-4 grid grid-cols-3 gap-4">
+          <div className="fixed bottom-0 left-0 w-full lg:hidden bg-white border-t border-slate-200 p-3 grid grid-cols-3 gap-3 shadow-inner">
             <button 
               disabled={currentIdx === 0}
               onClick={() => setCurrentIdx(prev => prev - 1)}
-              className="p-3 bg-gray-100 rounded-xl flex items-center justify-center text-gray-600 disabled:opacity-50"
+              className="p-2.5 bg-slate-100 rounded-lg flex items-center justify-center text-slate-600 disabled:opacity-50"
             >
-              <ChevronLeft size={24} />
+              <ChevronLeft size={20} />
             </button>
             
             <button 
               onClick={handleSubmit}
-              className="bg-brand text-white py-3 rounded-xl font-bold text-sm shadow-lg shadow-brand/20"
+              className="bg-brand text-white py-2.5 rounded-lg font-bold text-xs uppercase tracking-wider shadow-sm"
             >
               Selesai
             </button>
@@ -299,9 +299,9 @@ export default function ExamScreen() {
             <button 
               disabled={currentIdx === exam.questions.length - 1}
               onClick={() => setCurrentIdx(prev => prev + 1)}
-              className="p-3 bg-gray-100 rounded-xl flex items-center justify-center text-gray-600 disabled:opacity-50"
+              className="p-2.5 bg-slate-100 rounded-lg flex items-center justify-center text-slate-600 disabled:opacity-50"
             >
-              <ChevronRight size={24} />
+              <ChevronRight size={20} />
             </button>
           </div>
         </div>
